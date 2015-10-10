@@ -22,7 +22,7 @@ public class ListaDePublicacoesFragment extends Fragment {
 
         final MainActivity activity = (MainActivity) this.getActivity();
 
-        PublicacaoAdapter adapter = new PublicacaoAdapter(getActivity(), activity.getPublicacoes());
+        PublicacaoAdapter adapter = new PublicacaoAdapter(getActivity(), activity.getCarangosApplication().getPublicacoes());
         publicacoesList.setAdapter(adapter);
 
         return publicacoesList;
