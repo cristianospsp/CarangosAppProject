@@ -1,5 +1,6 @@
 package br.com.caelum.fj59.carangos.activity;
 
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.widget.ListView;
@@ -11,7 +12,10 @@ import java.util.List;
 import br.com.caelum.fj59.carangos.CarangosApplication;
 import br.com.caelum.fj59.carangos.R;
 import br.com.caelum.fj59.carangos.adapter.PublicacaoAdapter;
+import br.com.caelum.fj59.carangos.fragments.ListaDePublicacoesFragment;
+import br.com.caelum.fj59.carangos.fragments.ProgressFragment;
 import br.com.caelum.fj59.carangos.modelo.Publicacao;
+import br.com.caelum.fj59.carangos.navegacao.EstadoMainActivity;
 import br.com.caelum.fj59.carangos.tasks.BuscaMaisPublicacoesDelegate;
 import br.com.caelum.fj59.carangos.tasks.BuscaMaisPublicacoesTask;
 
@@ -20,19 +24,17 @@ public class MainActivity extends ActionBarActivity implements BuscaMaisPublicac
     private ListView listView;
     private List<Publicacao> publicacoes;
     private PublicacaoAdapter adapter;
+    private EstadoMainActivity estado;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.publicacoes_list);
+        setContentView(R.layout.main);
 
-        this.listView = (ListView) findViewById(R.id.publicacoes_list);
         this.publicacoes = new ArrayList<Publicacao>();
-        this.adapter = new PublicacaoAdapter(this, this.publicacoes);
 
-        this.listView.setAdapter(adapter);
-
-        new BuscaMaisPublicacoesTask(this).execute();
+        this.estado = EstadoMainActivity.INICIO;
+        this.estado.executa(this);
     }
 
     public List<Publicacao> getPublicacoes() {
@@ -43,7 +45,8 @@ public class MainActivity extends ActionBarActivity implements BuscaMaisPublicac
     public void lidaComRetorno(List<Publicacao> retorno) {
         this.publicacoes.clear();
         this.publicacoes.addAll(retorno);
-        this.adapter.notifyDataSetChanged();
+        this.estado = EstadoMainActivity.PRIMEIRAS_PUBLICACOES_RECEBIDAS;
+        this.estado.executa(this);
     }
 
     @Override
@@ -56,4 +59,14 @@ public class MainActivity extends ActionBarActivity implements BuscaMaisPublicac
     public CarangosApplication getCarangosApplication() {
         return (CarangosApplication) getApplication();
     }
+
+    public void alteraEstadoEExecuta(EstadoMainActivity estadoMainActivity) {
+        this.estado = estadoMainActivity;
+        this.estado.executa(this);
+    }
+
+    public void publicacoes() {
+        new BuscaMaisPublicacoesTask(this).execute();
+    }
+
 }
