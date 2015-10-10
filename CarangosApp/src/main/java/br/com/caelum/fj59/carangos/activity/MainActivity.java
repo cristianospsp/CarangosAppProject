@@ -8,6 +8,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.caelum.fj59.carangos.CarangosApplication;
 import br.com.caelum.fj59.carangos.R;
 import br.com.caelum.fj59.carangos.adapter.PublicacaoAdapter;
 import br.com.caelum.fj59.carangos.modelo.Publicacao;
@@ -49,5 +50,10 @@ public class MainActivity extends ActionBarActivity implements BuscaMaisPublicac
     public void lidaComErro(Exception e) {
         e.printStackTrace();
         Toast.makeText(this, "Erro ao buscar dados", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public CarangosApplication getCarangosApplication() {
+        return (CarangosApplication) getApplication();
     }
 }
