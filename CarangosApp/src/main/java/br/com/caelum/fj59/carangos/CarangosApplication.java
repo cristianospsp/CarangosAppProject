@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.caelum.fj59.carangos.infra.MyLog;
 import br.com.caelum.fj59.carangos.modelo.Publicacao;
 
 /**
@@ -29,6 +30,7 @@ public class CarangosApplication extends Application {
     }
 
     public void desregistra(AsyncTask<?,?,?> task) {
+        MyLog.i("CarangosApplication - desregistra....");
         tasks.remove(task);
     }
 

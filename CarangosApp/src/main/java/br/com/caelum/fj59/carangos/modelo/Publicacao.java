@@ -2,7 +2,7 @@ package br.com.caelum.fj59.carangos.modelo;
 
 import java.io.Serializable;
 
-public class Publicacao implements Serializable{
+public class Publicacao implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private Long id;

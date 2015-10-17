@@ -2,9 +2,12 @@ package br.com.caelum.fj59.carangos.tasks;
 
 import android.os.AsyncTask;
 
+import java.io.Serializable;
 import java.util.List;
 
+import br.com.caelum.fj59.carangos.CarangosApplication;
 import br.com.caelum.fj59.carangos.converter.PublicacaoConverter;
+import br.com.caelum.fj59.carangos.evento.EventoPublicacoesRecebidas;
 import br.com.caelum.fj59.carangos.infra.MyLog;
 import br.com.caelum.fj59.carangos.modelo.Publicacao;
 import br.com.caelum.fj59.carangos.webservice.Pagina;
@@ -16,17 +19,25 @@ import br.com.caelum.fj59.carangos.webservice.WebClient;
 public class BuscaMaisPublicacoesTask extends AsyncTask<Pagina, Void, List<Publicacao>> {
 
     private Exception erro;
-    private BuscaMaisPublicacoesDelegate delegate;
+   // private BuscaMaisPublicacoesDelegate delegate;
+    private CarangosApplication application;
 
-    public BuscaMaisPublicacoesTask(BuscaMaisPublicacoesDelegate delegate) {
+    public BuscaMaisPublicacoesTask(CarangosApplication application) {
+        this.application = application;
+        this.application.registra(this);
+    }
+
+    /*public BuscaMaisPublicacoesTask(BuscaMaisPublicacoesDelegate delegate) {
         this.delegate = delegate;
         this.delegate.getCarangosApplication().registra(this);
-    }
+    }*/
 
     @Override
     protected List<Publicacao> doInBackground(Pagina... paginas) {
         try {
-            Pagina paginaParaBuscar = paginas.length > 1? paginas[0] : new Pagina();
+            Thread.sleep(10000);
+
+            Pagina paginaParaBuscar = paginas.length > 1 ? paginas[0] : new Pagina();
 
             String jsonDeResposta = new WebClient("post/list?" + paginaParaBuscar).get();
 
@@ -43,12 +54,12 @@ public class BuscaMaisPublicacoesTask extends AsyncTask<Pagina, Void, List<Publi
     protected void onPostExecute(List<Publicacao> retorno) {
         MyLog.i("RETORNO OBTIDO!" + retorno);
 
-        if (retorno!=null) {
-            this.delegate.lidaComRetorno(retorno);
+        if (retorno != null) {
+            EventoPublicacoesRecebidas.notifica(this.application, (Serializable)retorno, true);
         } else {
-            this.delegate.lidaComErro(this.erro);
+            EventoPublicacoesRecebidas.notifica(this.application, this.erro, false);
         }
 
-        this.delegate.getCarangosApplication().desregistra(this);
+        this.application.desregistra(this);
     }
 }
