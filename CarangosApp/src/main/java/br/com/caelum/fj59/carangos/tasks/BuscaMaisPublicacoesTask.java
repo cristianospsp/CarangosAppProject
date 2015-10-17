@@ -35,7 +35,7 @@ public class BuscaMaisPublicacoesTask extends AsyncTask<Pagina, Void, List<Publi
     @Override
     protected List<Publicacao> doInBackground(Pagina... paginas) {
         try {
-            Thread.sleep(10000);
+            //Thread.sleep(10000);
 
             Pagina paginaParaBuscar = paginas.length > 1 ? paginas[0] : new Pagina();
 
