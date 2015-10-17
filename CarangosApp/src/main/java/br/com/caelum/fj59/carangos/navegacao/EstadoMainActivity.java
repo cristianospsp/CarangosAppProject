@@ -16,7 +16,7 @@ public enum EstadoMainActivity {
     INICIO {
         @Override
         public void executa(MainActivity activity) {
-            activity.publicacoes();
+            activity.buscaPublicacoes();
             activity.alteraEstadoEExecuta(EstadoMainActivity.AGUARDANDO_PUBLICACOES);
         }
     }, AGUARDANDO_PUBLICACOES {
@@ -30,6 +30,11 @@ public enum EstadoMainActivity {
         public void executa(MainActivity activity) {
             ListaDePublicacoesFragment publicacoesFragment = new ListaDePublicacoesFragment();
             this.colocarFragmentNaTela(activity, publicacoesFragment);
+        }
+    }, PULL_TO_REFRESH_REQUISITADO {
+        @Override
+        public void executa(MainActivity activity) {
+            activity.buscaPublicacoes();
         }
     };
 

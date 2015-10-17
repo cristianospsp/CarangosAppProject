@@ -21,7 +21,7 @@ public class EventoPublicacoesRecebidas extends BroadcastReceiver {
 
     private static final String RETORNO = "retorno";
     private static final String SUCESSO = "sucesso";
-    private static final String PUBLICACOES_RECEBIDAS = "publicacoes recebidas";
+    private static final String PUBLICACOES_RECEBIDAS = "buscaPublicacoes recebidas";
 
     private BuscaMaisPublicacoesDelegate delegate;
 

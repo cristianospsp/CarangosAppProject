@@ -63,7 +63,7 @@ public class MainActivity extends ActionBarActivity implements BuscaMaisPublicac
         this.estado.executa(this);
     }
 
-    public void publicacoes() {
+    public void buscaPublicacoes() {
         new BuscaMaisPublicacoesTask(this.getCarangosApplication()).execute();
     }
 
