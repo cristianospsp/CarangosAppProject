@@ -1,6 +1,7 @@
 package br.com.caelum.fj59.carangos;
 
 import android.app.Application;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ public class CarangosApplication extends Application {
 
     private List<Publicacao> publicacoes = new ArrayList<>();
     private List<AsyncTask<?,?,?>> tasks = new ArrayList<AsyncTask<?,?,?>>();
+    private SharedPreferences preferences;
 
     @Override
     public void onTerminate() {
@@ -36,5 +38,14 @@ public class CarangosApplication extends Application {
 
     public List<Publicacao> getPublicacoes() {
         return publicacoes;
+    }
+
+    public void lidaComRespostaDoRegistroNoServidor(String registro) {
+        if (registro != null) {
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putBoolean("REGISTRADO", true);
+            editor.putString("ID_DO_REGISTRO", registro);
+            editor.commit();
+        }
     }
 }
