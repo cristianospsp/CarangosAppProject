@@ -19,7 +19,6 @@ import br.com.caelum.fj59.carangos.webservice.WebClient;
 public class BuscaMaisPublicacoesTask extends AsyncTask<Pagina, Void, List<Publicacao>> {
 
     private Exception erro;
-   // private BuscaMaisPublicacoesDelegate delegate;
     private CarangosApplication application;
 
     public BuscaMaisPublicacoesTask(CarangosApplication application) {
@@ -27,15 +26,9 @@ public class BuscaMaisPublicacoesTask extends AsyncTask<Pagina, Void, List<Publi
         this.application.registra(this);
     }
 
-    /*public BuscaMaisPublicacoesTask(BuscaMaisPublicacoesDelegate delegate) {
-        this.delegate = delegate;
-        this.delegate.getCarangosApplication().registra(this);
-    }*/
-
     @Override
     protected List<Publicacao> doInBackground(Pagina... paginas) {
         try {
-            //Thread.sleep(10000);
 
             Pagina paginaParaBuscar = paginas.length > 1 ? paginas[0] : new Pagina();
 

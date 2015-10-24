@@ -29,7 +29,7 @@ public class RegistraAparelhoTask extends AsyncTask<Void, Void, String> {
 
         try {
             GoogleCloudMessaging gcm = GoogleCloudMessaging.getInstance(this.app);
-            gcm.register(Constantes.GCM_SERVER_ID);
+            registrationId =gcm.register(Constantes.GCM_SERVER_ID);
             MyLog.i("Aparelho registrado com id: " + registrationId);
 
             String email = InformacoesDoUsuario.getEmail(this.app);
