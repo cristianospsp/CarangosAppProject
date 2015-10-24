@@ -11,6 +11,7 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/CarangosApp" />
+            <option value="$PROJECT_DIR$/CarangosHotRod" />
             <option value="$PROJECT_DIR$/CarangosTunning" />
           </set>
         </option>

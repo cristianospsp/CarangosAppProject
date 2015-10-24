@@ -1,1 +1,1 @@
-include ':CarangosApp', ':CarangosTunning'
+include ':CarangosApp', ':CarangosTunning', ':CarangosHotRod'
