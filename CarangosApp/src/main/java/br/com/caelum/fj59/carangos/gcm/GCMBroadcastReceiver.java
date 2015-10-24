@@ -13,7 +13,7 @@ import android.widget.Toast;
 import java.util.List;
 
 import br.com.caelum.fj59.carangos.R;
-import br.com.caelum.fj59.carangos.activity.MainActivity;
+import br.com.caelum.fj59.carangos.activity.LeiaoActivity;
 import br.com.caelum.fj59.carangos.infra.MyLog;
 
 /**
@@ -26,14 +26,14 @@ public class GCMBroadcastReceiver extends BroadcastReceiver {
         MyLog.i("Chegou a mensagem do GCM....");
 
         if (appEstaRodando(context)) {
-            Toast.makeText(context, "Novo leilão começou ! ! !", Toast.LENGTH_LONG).show();
+           Toast.makeText(context, "Um novo leilão começou...", Toast.LENGTH_SHORT).show();
         } else {
 
             String mensagem = (String) intent.getExtras().getSerializable("message");
 
             MyLog.i("Mensagem com conteúdo: " + mensagem);
 
-            Intent irParaLeilao = new Intent(context, MainActivity.class);
+            Intent irParaLeilao = new Intent(context, LeiaoActivity.class);
 
             PendingIntent acaoPendente = PendingIntent.getActivity(context, 0, irParaLeilao, PendingIntent.FLAG_CANCEL_CURRENT);
 
