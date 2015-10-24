@@ -1,9 +1,18 @@
 package br.com.caelum.fj59.carangos.infra;
 
-public class MyServer {
-    private static String uri = "http://carangos.herokuapp.com/%s";
+import android.app.Application;
 
-    public static String uriFor(String value) {
+import br.com.caelum.fj59.carangos.R;
+
+public class MyServer {
+
+    private String uri;
+
+    public MyServer(Application app) {
+        this.uri = app.getResources().getString(R.string.server_uri);
+    }
+
+    public String uriFor(String value) {
         return String.format(uri, value);
     }
 }

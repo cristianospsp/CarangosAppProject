@@ -32,7 +32,7 @@ public class BuscaMaisPublicacoesTask extends AsyncTask<Pagina, Void, List<Publi
 
             Pagina paginaParaBuscar = paginas.length > 1 ? paginas[0] : new Pagina();
 
-            String jsonDeResposta = new WebClient("post/list?" + paginaParaBuscar).get();
+            String jsonDeResposta = new WebClient("post/list?" + paginaParaBuscar, application).get();
 
             List<Publicacao> publicacoesRecebidas = new PublicacaoConverter().converte(jsonDeResposta);
 

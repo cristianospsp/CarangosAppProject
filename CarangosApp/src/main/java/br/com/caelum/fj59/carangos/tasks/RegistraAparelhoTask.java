@@ -35,7 +35,7 @@ public class RegistraAparelhoTask extends AsyncTask<Void, Void, String> {
             String email = InformacoesDoUsuario.getEmail(this.app);
 
             String url = "device/register/"+email+"/"+registrationId;
-            WebClient webClient = new WebClient(url);
+            WebClient webClient = new WebClient(url, app);
             webClient.post();
 
         } catch (Exception e) {

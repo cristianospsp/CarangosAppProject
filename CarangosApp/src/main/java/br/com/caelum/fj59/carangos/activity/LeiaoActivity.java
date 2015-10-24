@@ -36,7 +36,7 @@ public class LeiaoActivity extends ActionBarActivity {
 
         CustonHandler handler = new CustonHandler(adapter, lancesAteOMomento);
 
-        new BuscaLeiloesTask(handler, horarioUltimaBusca).executa();
+        new BuscaLeiloesTask(handler, horarioUltimaBusca, this.getApplication()).executa();
 
     }
 }
